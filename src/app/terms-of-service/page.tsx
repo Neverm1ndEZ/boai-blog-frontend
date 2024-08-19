@@ -8,7 +8,8 @@ export default function page() {
 				Welcome to blinkofai.io (the “Site”). By using the Site, you agree to be
 				bound by these Terms of Service (the “Terms”). If you do not agree to
 				these Terms, please do not use the Site. Blinkofai is a service provided
-				by BlinkofAI Private Limited. ("we," "us," or "our").
+				by BlinkofAI Private Limited. (&ldquo;we,&rdquo; &ldquo;us,&rdquo; or
+				&ldquo;our&rdquo;).
 			</p>
 			<h2 className="text-4xl font-bold my-6">Using the Site</h2>
 			<p className="text-xl mb-4">
@@ -27,17 +28,18 @@ export default function page() {
 				</li>
 				<li>
 					To transmit, or procure the sending of, any advertising or promotional
-					material, including any "junk mail," "chain letter," "spam," or any
-					other similar solicitation.
+					material, including any &ldquo;junk mail,&rdquo; &ldquo;chain
+					letter,&rdquo; &ldquo;spam,&rdquo; or any other similar solicitation.
 				</li>
 				<li>
 					To impersonate or attempt to impersonate remade.ai, a Remade employee,
 					another user, or any other person or entity.
 				</li>
 				<li>
-					To engage in any other conduct that restricts or inhibits anyone's use
-					or enjoyment of the Site, or which, as determined by us, may harm
-					remade.ai or users of the Site or expose them to liability.
+					To engage in any other conduct that restricts or inhibits
+					anyone&rsquo;s use or enjoyment of the Site, or which, as determined
+					by us, may harm remade.ai or users of the Site or expose them to
+					liability.
 				</li>
 			</ul>
 			<h2 className="text-4xl font-bold my-6">
@@ -59,8 +61,8 @@ export default function page() {
 				</li>
 				<li>
 					Respectful Sharing: Respect the creativity of others. Do not
-					redistribute or share another user's creations without obtaining their
-					explicit consent.
+					redistribute or share another user&apos;s creations without obtaining
+					their explicit consent.
 				</li>
 				<li>
 					Consequences of Breach: The Site prioritizes the safety and respect of
@@ -95,9 +97,10 @@ export default function page() {
 				increase usage limits for our users. By subscribing to any of our plans,
 				you agree to the monthly or yearly billing cycle as described at the
 				time of purchase. All subscriptions renew automatically unless canceled
-				by the user. It's the user's responsibility to manage and cancel their
-				subscription if they no longer wish to be billed. Refunds for
-				subscription plans are not offered unless otherwise specified by Remade.
+				by the user. It&apos;s the user&apos;s responsibility to manage and
+				cancel their subscription if they no longer wish to be billed. Refunds
+				for subscription plans are not offered unless otherwise specified by
+				Remade.
 			</p>
 			<h2 className="text-4xl font-bold my-6">Disclaimer of Warranties</h2>
 			<p className="text-xl mb-6">

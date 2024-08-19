@@ -5,13 +5,14 @@ export default function page() {
 		<div className="min-h-screen bg-[#000] text-[#c2c2c2] mx-auto py-8 px-8 lg:px-32">
 			<h1 className="text-center text-7xl font-bold mb-8">Privacy Policy</h1>
 			<p className="text-xl mb-6">
-				This privacy policy (the "Policy") describes how BlinkofAI Private
-				Limited. ("we," "us," or "our") collects, uses, and shares personal
-				information of users of the website blinkofai.io (the "Site") BlinkofAI
-				is a service provided by BlinkofAI Private Limited. By using the Site,
-				you agree to the collection, use, and sharing of your personal
-				information as described in this Policy. If you do not agree with the
-				terms of this Policy, please do not use the Site.
+				This privacy policy (the &quot;Policy&quot;) describes how BlinkofAI
+				Private Limited. (&quot;we,&quot; &quot;us,&quot; or &quot;our&quot;)
+				collects, uses, and shares personal information of users of the website
+				blinkofai.io (the &quot;Site&quot;) BlinkofAI is a service provided by
+				BlinkofAI Private Limited. By using the Site, you agree to the
+				collection, use, and sharing of your personal information as described
+				in this Policy. If you do not agree with the terms of this Policy,
+				please do not use the Site.
 			</p>
 			<h2 className="text-4xl font-bold my-6">Information We Collect</h2>
 			<p className="text-xl mb-6">
