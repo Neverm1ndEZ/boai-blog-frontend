@@ -4,27 +4,6 @@ import Link from "next/link";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { tomorrow } from "react-syntax-highlighter/dist/esm/styles/prism";
 
-export const getStaticProps = async ({
-	params,
-}: {
-	params: { slug: string };
-}) => {
-	const blog = await fetchBlog(params.slug);
-
-	if (!blog) {
-		return {
-			notFound: true,
-		};
-	}
-
-	return {
-		props: {
-			blog,
-		},
-		revalidate: 60,
-	};
-};
-
 const fetchBlog = async (slug: string) => {
 	try {
 		const response = await axios.get(
@@ -42,6 +21,36 @@ const fetchBlog = async (slug: string) => {
 		return null;
 	}
 };
+
+export async function generateStaticParams() {
+	// Fetch all published blog posts and return their slugs
+	const response = await axios.get(
+		`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/blogs?populate=*`,
+	);
+	const blogs = response.data.data;
+	return blogs.map((blog: any) => ({
+		slug: blog.attributes.slug,
+	}));
+}
+
+export async function generateMetadata({
+	params,
+}: {
+	params: { slug: string };
+}) {
+	const blog = await fetchBlog(params.slug);
+
+	if (!blog) {
+		return {
+			title: "Blog Post Not Found",
+		};
+	}
+
+	return {
+		title: blog.attributes.Title,
+		description: blog.attributes.Subtitle,
+	};
+}
 
 const RichTextRenderer = ({ block }: { block: any }) => {
 	switch (block.type) {
