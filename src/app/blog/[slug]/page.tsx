@@ -1,6 +1,8 @@
 import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { tomorrow } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 const fetchBlog = async (slug: string) => {
 	try {
@@ -13,10 +15,73 @@ const fetchBlog = async (slug: string) => {
 			},
 		);
 		console.log("Blog API response:", response.data);
-		return response.data.data[0]; // Return the first (and should be only) matching blog post
+		return response.data.data[0];
 	} catch (error) {
 		console.error("Error fetching blog:", error);
 		return null;
+	}
+};
+
+const RichTextRenderer = ({ block }: { block: any }) => {
+	switch (block.type) {
+		case "paragraph":
+			return <p className="mb-6">{block.children[0].text}</p>;
+		case "heading":
+			const HeadingTag = `h${block.level}` as keyof JSX.IntrinsicElements;
+			const fontSize = ["text-4xl", "text-3xl", "text-2xl", "text-xl"][
+				block.level - 1
+			];
+			const fontWeight = block.children[0].bold ? "font-bold" : "font-semibold";
+			return (
+				<HeadingTag className={`${fontSize} ${fontWeight} text-white mb-4`}>
+					{block.children[0].text}
+				</HeadingTag>
+			);
+		case "list":
+			const ListTag = block.format === "ordered" ? "ol" : "ul";
+			return (
+				<ListTag
+					className={`mb-6 ${
+						block.format === "ordered" ? "list-decimal" : "list-disc"
+					} pl-6`}
+				>
+					{block.children.map((item: any, index: number) => (
+						<li key={index} className="mb-2">
+							{item.children[0].text}
+						</li>
+					))}
+				</ListTag>
+			);
+		case "image":
+			return (
+				<div className="relative w-full aspect-video mb-6">
+					<Image
+						src={`${process.env.NEXT_PUBLIC_BACKEND_URL}${block.image.url}`}
+						alt={block.image.alternativeText || "Blog image"}
+						fill
+						sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+						className="object-cover rounded-lg"
+					/>
+				</div>
+			);
+		case "quote":
+			return (
+				<blockquote className="border-l-4 border-[#EE7300] pl-4 italic mb-6">
+					{block.children[0].text}
+				</blockquote>
+			);
+		case "code":
+			return (
+				<SyntaxHighlighter
+					language={block.language || "javascript"}
+					style={tomorrow}
+					className="mb-6"
+				>
+					{block.children[0].text}
+				</SyntaxHighlighter>
+			);
+		default:
+			return null;
 	}
 };
 
@@ -35,7 +100,7 @@ export default async function BlogContent({
 	const { attributes } = blog;
 
 	return (
-		<div className="max-w-5xl mx-auto p-6 mt-20">
+		<div className="max-w-5xl mx-auto p-6 mt-10">
 			<Link href={"/"}>{"< Back"}</Link>
 			<h1 className="text-4xl text-[#c0c0c0] font-bold leading-tight mb-6">
 				{attributes.Title}
@@ -48,47 +113,21 @@ export default async function BlogContent({
 				<span className="block w-px h-4 bg-white"></span>
 				<p>{attributes.readTime}</p>
 			</div>
-			<div className="mb-8">
+			<div className="relative w-full aspect-[7/5] border-2 border-[#EE7300] rounded-2xl overflow-hidden my-4">
 				<Image
 					src={`${process.env.NEXT_PUBLIC_BACKEND_URL}${
-						attributes.cover?.data[0]?.attributes?.formats?.large?.url || ""
+						blog.attributes.cover?.data[0]?.attributes?.url || ""
 					}`}
-					alt={attributes.Title}
-					width={1000}
-					height={480}
-					className="border-2 border-[#EE7300] rounded-lg"
+					alt={blog.attributes.Title}
+					fill
+					sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+					className="object-cover"
 				/>
 			</div>
 			<div className="text-lg leading-relaxed text-[#BABABA]">
-				{attributes.textBody.map((block: any, index: number) => {
-					switch (block.type) {
-						case "paragraph":
-							return (
-								<p key={index} className="mb-6">
-									{block.children[0].text}
-								</p>
-							);
-						case "heading":
-							const HeadingTag =
-								`h${block.level}` as keyof JSX.IntrinsicElements;
-							const fontSize = ["text-4xl", "text-3xl", "text-2xl", "text-xl"][
-								block.level - 1
-							];
-							const fontWeight = block.children[0].bold
-								? "font-bold"
-								: "font-semibold";
-							return (
-								<HeadingTag
-									key={index}
-									className={`${fontSize} ${fontWeight} text-white mb-4`}
-								>
-									{block.children[0].text}
-								</HeadingTag>
-							);
-						default:
-							return null;
-					}
-				})}
+				{attributes.textBody.map((block: any, index: number) => (
+					<RichTextRenderer key={index} block={block} />
+				))}
 			</div>
 		</div>
 	);

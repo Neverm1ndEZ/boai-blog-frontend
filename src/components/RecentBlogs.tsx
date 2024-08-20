@@ -99,13 +99,15 @@ export default async function RecentBlogs() {
 							<h2 className="w-full text-[#c0c0c0] text-lg font-medium">
 								{blog.attributes.Title}
 							</h2>
-							<div className="flex flex-col gap-1 lg:flex-row lg:divide-x text-sm text-[#9e9e9e] divide-[#9e9e9e] mt-2">
+							<div className="grid grid-cols-3 md:grid-cols-1 lg:grid-cols-3 divide-x md:divide-x-0 lg:divide-x text-sm text-[#9e9e9e] divide-[#9e9e9e] mt-2">
 								<p className="pr-5 text-[#EE7300]">
 									{blog.attributes.author?.data?.attributes?.author ||
 										"Unknown Author"}
 								</p>
-								<p className="lg:px-5">{blog.attributes.readTime}</p>
-								<p className="lg:pl-5">
+								<p className="pl-5 md:pl-0 lg:pl-5">
+									{blog.attributes.readTime}
+								</p>
+								<p className="pl-5 md:pl-0 lg:pl-5">
 									{new Intl.DateTimeFormat("en-GB", {
 										day: "2-digit",
 										month: "2-digit",

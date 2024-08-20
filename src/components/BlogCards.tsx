@@ -8,16 +8,15 @@ export default function BlogCards({ blogs }: { blogs: any }) {
 				<div key={blog.id} className="relative">
 					<Link href={`/blog/${blog.attributes.slug}`} className="">
 						{/* Image */}
-						<div>
+						<div className="relative w-full aspect-[7/5] border-2 border-[#EE7300] rounded-2xl overflow-hidden">
 							<Image
 								src={`${process.env.NEXT_PUBLIC_BACKEND_URL}${
-									blog.attributes.cover?.data[0]?.attributes?.formats?.medium
-										?.url || ""
+									blog.attributes.cover?.data[0]?.attributes?.url || ""
 								}`}
 								alt={blog.attributes.Title}
-								width={350}
-								height={250}
-								className="border-2 border-[#EE7300] rounded-2xl"
+								fill
+								sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+								className="object-cover"
 							/>
 						</div>
 
