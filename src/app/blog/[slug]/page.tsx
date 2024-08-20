@@ -4,6 +4,27 @@ import Link from "next/link";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { tomorrow } from "react-syntax-highlighter/dist/esm/styles/prism";
 
+export const getStaticProps = async ({
+	params,
+}: {
+	params: { slug: string };
+}) => {
+	const blog = await fetchBlog(params.slug);
+
+	if (!blog) {
+		return {
+			notFound: true,
+		};
+	}
+
+	return {
+		props: {
+			blog,
+		},
+		revalidate: 60,
+	};
+};
+
 const fetchBlog = async (slug: string) => {
 	try {
 		const response = await axios.get(
