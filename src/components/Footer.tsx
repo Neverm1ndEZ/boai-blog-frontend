@@ -16,7 +16,7 @@ export default function Footer() {
 				/>
 			</div>
 			<div className="flex flex-col lg:flex-row justify-between items-center gap-3 lg:w-3/5">
-				<div className="flex flex-col lg:flex-row items-center gap-3 justify-between lg:w-1/4">
+				<div className="flex flex-col lg:flex-row items-center gap-5 justify-center lg:w-1/2">
 					<Link href={"/privacy-policy"}>
 						<p>Privacy Policy</p>
 					</Link>
