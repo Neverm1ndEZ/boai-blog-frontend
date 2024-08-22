@@ -15,6 +15,10 @@ const fetchBlog = async (slug: string) => {
 			},
 		);
 		console.log("Blog API response:", response.data);
+		console.log(
+			"endpoint",
+			`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/blogs?filters[slug][$eq]=${slug}&populate=*`,
+		);
 		return response.data.data[0];
 	} catch (error) {
 		console.error("Error fetching blog:", error);
@@ -135,7 +139,9 @@ export default async function BlogContent({
 			<h1 className="text-4xl text-[#c0c0c0] font-bold leading-tight mb-6">
 				{attributes.Title}
 			</h1>
-
+			<h2 className="pl-10 text-xl text-[#c0c0c0] font- leading-tight mb-6">
+				{attributes.Subtitle}
+			</h2>
 			<div className="flex items-center space-x-4 text-sm text-white mb-8">
 				<p className="text-[#EE7300]">
 					- {attributes.author?.data?.attributes?.author || "Unknown Author"}
@@ -143,7 +149,7 @@ export default async function BlogContent({
 				<span className="block w-px h-4 bg-white"></span>
 				<p>{attributes.readTime}</p>
 			</div>
-			<div className="relative w-full aspect-[7/5] border-2 border-[#EE7300] rounded-2xl overflow-hidden my-4">
+			<div className="relative w-full aspect-[7/5] shadow-[0_0_4px_gray] hover:shadow-[0_0_4px_orange] rounded-2xl overflow-hidden my-4">
 				<Image
 					src={`${process.env.NEXT_PUBLIC_BACKEND_URL}${
 						blog.attributes.cover?.data[0]?.attributes?.url || ""
@@ -154,7 +160,7 @@ export default async function BlogContent({
 					className="object-cover"
 				/>
 			</div>
-			<div className="text-lg leading-relaxed text-[#BABABA]">
+			<div className="pt-7 text-lg leading-relaxed text-[#BABABA]">
 				{attributes.textBody.map((block: any, index: number) => (
 					<RichTextRenderer key={index} block={block} />
 				))}

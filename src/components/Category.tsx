@@ -7,7 +7,7 @@ export default function Category({ cat }: { cat: any }) {
 			onClick={() => {
 				console.log("Clicked:", cat.attributes.name);
 			}}
-			className="text-sm xl:text-base font-medium text-center rounded-2xl cursor-pointer p-2.5 border-2"
+			className="w-28 h-auto p-3 text-xs md:text-xs lg:text-sm font-medium text-center rounded-2xl cursor-pointer bg-[#2e2d2c] "
 		>
 			{cat.attributes.name}
 		</div>

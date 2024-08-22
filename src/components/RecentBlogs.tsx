@@ -1,71 +1,3 @@
-// import Link from "next/link";
-// import React from "react";
-
-// export default function RecentBlogs() {
-// 	const date = new Date();
-
-// 	const data = [
-// 		{
-// 			title:
-// 				"Beyond Deepfakes: The Positive Potential of Al in Video Generation",
-// 			author: "Sagar K.",
-// 			time: "1 mins",
-// 			date: date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear(),
-// 		},
-// 		{
-// 			title: "The Creative Al: How Machines are Becoming Filmmakers",
-// 			author: "Sagar K.",
-// 			time: "1 mins",
-// 			date: date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear(),
-// 		},
-// 		{
-// 			title:
-// 				"Al-Generated Visual Effects: Bringing Imagination to Life in Seconds",
-// 			author: "Sagar K.",
-// 			time: "1 mins",
-// 			date: date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear(),
-// 		},
-// 		{
-// 			title:
-// 				"Personalized Videos at Scale: The Al Technology Behind Tailored Content",
-// 			author: "Sagar K.",
-// 			time: "1 mins",
-// 			date: date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear(),
-// 		},
-// 		{
-// 			title:
-// 				"Creating Viral Content: How Al is Shaping the Next Generation of Video Marketing",
-// 			author: "Sagar K.",
-// 			time: "1 mins",
-// 			date: date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear(),
-// 		},
-// 	];
-
-// 	return (
-// 		<div className="h-full border-t-2 border-gray-600 md:border-t-0 lg:border-t-0">
-// 			<div className="grid place-items-start">
-// 				<h1 className="font-medium text-2xl mt-10 mb-4">Recent Blogs</h1>
-// 				<div className="divide-y-2">
-// 					{data.map((item, index) => (
-// 						<Link href={"/blog/test"} key={index}>
-// 							<div className="py-5 space-y-2">
-// 								<h2 className="w-full text-[#c0c0c0] text-lg font-medium">
-// 									{item.title}
-// 								</h2>
-// 								<div className="flex flex-col gap-1 lg:flex-row lg:divide-x text-sm text-[#9e9e9e] divide-[#9e9e9e] mt-2">
-// 									<p className="pr-5 text-[#EE7300]">{item.author}</p>
-// 									<p className="lg:px-5">{item.time}</p>
-// 									<p className="lg:pl-5">{item.date}</p>
-// 								</div>
-// 							</div>
-// 						</Link>
-// 					))}
-// 				</div>
-// 			</div>
-// 		</div>
-// 	);
-// }
-
 import axios from "axios";
 import Link from "next/link";
 
@@ -95,26 +27,31 @@ export default async function RecentBlogs() {
 			<div className="divide-y-2">
 				{recentBlogs.map((blog: any) => (
 					<Link href={`/blog/${blog.attributes.slug}`} key={blog.id}>
-						<div className="py-5 space-y-2">
-							<h2 className="w-full text-[#c0c0c0] text-lg font-medium">
-								{blog.attributes.Title}
-							</h2>
-							<div className="grid grid-cols-3 md:grid-cols-1 lg:grid-cols-3 divide-x md:divide-x-0 lg:divide-x text-sm text-[#9e9e9e] divide-[#9e9e9e] mt-2">
-								<p className="pr-5 text-[#EE7300]">
-									{blog.attributes.author?.data?.attributes?.author ||
-										"Unknown Author"}
+						<div className="p-4 border-b border-gray-700">
+							<article className="my-4 md:my-5 space-y-2 md:space-y-3">
+								<h2 className="text-[#c0c0c0] text-base md:text-lg font-medium">
+									{blog.attributes.Title}
+								</h2>
+								<p className="text-xs md:text-sm text-[#9e9e9e]">
+									{blog.attributes.Subtitle}
 								</p>
-								<p className="pl-5 md:pl-0 lg:pl-5">
-									{blog.attributes.readTime}
-								</p>
-								<p className="pl-5 md:pl-0 lg:pl-5">
+							</article>
+							<article className="w-full grid grid-cols-2 md:grid-cols-1 lg:grid-cols-2 items-end text-xs md:text-sm text-[#9e9e9e] mt-2">
+								<div>
+									<p className="text-[#EE7300] whitespace-nowrap">
+										{blog.attributes.author?.data?.attributes?.author ||
+											"Unknown Author"}
+									</p>
+									<p className="">{blog.attributes.readTime}</p>
+								</div>
+								<p className="pl-5 md:pl-0 lg:pl-5 text-end">
 									{new Intl.DateTimeFormat("en-GB", {
 										day: "2-digit",
 										month: "2-digit",
 										year: "numeric",
 									}).format(new Date(blog.attributes.publishedAt))}
 								</p>
-							</div>
+							</article>
 						</div>
 					</Link>
 				))}

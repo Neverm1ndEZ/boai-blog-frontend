@@ -1,9 +1,12 @@
+import Footer from "@/components/Footer";
 import React, { PropsWithChildren } from "react";
 
 const BlogLayout = ({ children }: PropsWithChildren): JSX.Element => {
 	return (
 		<section className="">
-			<div className="">{children}</div>
+			<div className="">
+				{children} <Footer />
+			</div>
 		</section>
 	);
 };

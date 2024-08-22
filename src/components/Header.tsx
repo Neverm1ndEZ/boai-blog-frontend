@@ -6,7 +6,7 @@ export default function Header() {
 	return (
 		<div className="h-24 flex w-full items-center border-b-2 border-gray-600">
 			{/* Logo */}
-			<div className="absolute top-5 left-3 md:left-20 w-20 h-auto">
+			<div className=" w-20 h-auto">
 				<Link href={"/"}>
 					<Image
 						src="/logoOne.png"

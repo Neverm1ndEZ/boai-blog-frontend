@@ -45,7 +45,7 @@ const Home = async () => {
 	const categories = await fetchCategories();
 	const blogs = await fetchBlogs();
 	return (
-		<div className="max-w-screen-xl mx-auto p-4 flex flex-col min-h-screen">
+		<div className="max-w-screen-xl mx-auto p- flex flex-col min-h-screen">
 			<Header />
 
 			<div className="flex flex-col md:flex-row gap-4 flex-grow">
@@ -53,7 +53,7 @@ const Home = async () => {
 					{blogs ? <BlogCards blogs={blogs} /> : <p>Failed to load blogs.</p>}
 				</div>
 
-				<div className="md:w-1/3 w-full">
+				<div className="bg-[#1c1c1c] p-10 md:w-1/3 w-full">
 					{categories ? (
 						<Categories categories={categories} />
 					) : (
