@@ -38,7 +38,7 @@ export default function BlogCards({ blogs }: { blogs: any }) {
 									</p>
 									<p className="">{blog.attributes.readTime}</p>
 								</div>
-								<p className="pl-5 md:pl-0 lg:pl-5">
+								<p className="pl-5 md:pl-0 lg:pl-5 text-end">
 									{new Intl.DateTimeFormat("en-GB", {
 										day: "2-digit",
 										month: "2-digit",
